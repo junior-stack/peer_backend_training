@@ -21,3 +21,14 @@ exports.getAllColors = functions.https.onCall((data, context) => {
         return snapshots.docs.map((doc) => doc.data());
       });
 });
+
+exports.updateColor = functions.https.onCall((data, context) => {
+  return admin
+      .firestore()
+      .collection("userColor")
+      .doc(data.uid)
+      .update({color: data.color})
+      .then((res) => {
+        return {message: "success", write: res};
+      });
+});
