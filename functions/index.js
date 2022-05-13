@@ -43,3 +43,12 @@ exports.uploadPicture = functions.https.onCall((data, context) => {
         return {message: "success", write: res};
       });
 });
+
+exports.getProfile = functions.https.onCall((data, context) => {
+  return admin
+      .firestore()
+      .collection("userProfile")
+      .doc(data.uid)
+      .get()
+      .then((doc) => doc.data());
+});
