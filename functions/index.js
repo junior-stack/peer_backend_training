@@ -32,3 +32,14 @@ exports.updateColor = functions.https.onCall((data, context) => {
         return {message: "success", write: res};
       });
 });
+
+exports.uploadPicture = functions.https.onCall((data, context) => {
+  return admin
+      .firestore()
+      .collection("userProfile")
+      .doc(data.uid)
+      .set({url: data.url})
+      .then((res) => {
+        return {message: "success", write: res};
+      });
+});
