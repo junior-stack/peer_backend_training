@@ -7,8 +7,9 @@ export class GameLobyController {
   constructor(private readonly gameService: GameService) {}
 
   @Get('/allColors')
-  getAllColors(): ColorsDto[] {
-    return this.gameService.getAllColors();
+  async getAllColors(): Promise<ColorsDto[]> {
+    const data = await this.gameService.getAllColors();
+    return data;
   }
 
   @Post('/updateColor')
