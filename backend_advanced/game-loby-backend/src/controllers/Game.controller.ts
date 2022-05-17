@@ -13,8 +13,8 @@ export class GameLobyController {
   }
 
   @Post('/updateColor')
-  updateColor(@Body() body: ColorsDto) {
-    console.log('body: ', body);
-    return 'updateColor';
+  async updateColor(@Body() body: ColorsDto) {
+    const data = await this.gameService.updateColors(body.userID, body.color)
+    return data;
   }
 }

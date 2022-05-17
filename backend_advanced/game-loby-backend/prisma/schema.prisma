@@ -15,10 +15,3 @@ model users {
   url      String?
 }
 
-model user {
-  userID   Int     @id(map: "Users_pkey")
-  email    String
-  password String
-  color    String
-  url      String?
-}
