@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { AuthenticationGuard } from 'src/common/auth/authentication.guard';
 import { ColorsDto } from 'src/dto/game.dto';
 import { GameService } from 'src/services/game/game.service';
 
@@ -12,9 +13,10 @@ export class GameLobyController {
     return data;
   }
 
+  @UseGuards(AuthenticationGuard)
   @Post('/updateColor')
   async updateColor(@Body() body: ColorsDto) {
-    const data = await this.gameService.updateColors(body.userID, body.color)
+    const data = await this.gameService.updateColors(body.userID, body.color);
     return data;
   }
 }
