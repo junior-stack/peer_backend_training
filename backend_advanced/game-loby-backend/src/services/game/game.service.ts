@@ -8,20 +8,25 @@ import { PrismaClient } from '.prisma/client';
 export class GameService {
   private prisma = new PrismaClient();
 
-  async getAllColors(){
-      const data = await this.prisma.users.findMany();
-      return data;
+  async getAllColors() {
+    const data = await this.prisma.users.findMany({
+      orderBy: { email: 'asc' },
+    });
+    console.log('data: ', data);
+    return data;
   }
 
   async updateColors(userID: string, color: string) {
-    try{
-      const user =  await this.prisma.users.update({ where: {userID: userID}, data: {color: color}})
-      if(!user) return "Error: the user does not exists"
-      return JSON.stringify(user)
-    } catch(err){
-      console.log(err)
-      return JSON.stringify(err)
+    try {
+      const user = await this.prisma.users.update({
+        where: { userID: userID },
+        data: { color: color },
+      });
+      if (!user) return 'Error: the user does not exists';
+      return JSON.stringify(user);
+    } catch (err) {
+      console.error(err);
+      return JSON.stringify(err);
     }
   }
 }
-
