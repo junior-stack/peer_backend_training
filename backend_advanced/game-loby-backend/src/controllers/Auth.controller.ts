@@ -1,16 +1,14 @@
-import { Controller, Post, Get, Param, Body } from '@nestjs/common';
-import { AuthInfoDto } from 'src/dto/auth.dto';
+import { Controller, Post, Get, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from 'src/services/auth/auth.service';
 
 @Controller('auth')
 export class AuthController {
-
   constructor(private readonly authService: AuthService) {}
 
-
+  @UseGuards()
   @Post('/login')
-  async login(@Body() param: AuthInfoDto) {
-    const message = await this.authService.login(param.email, param.password)
+  async login(@Request() req) {
+    const message = await this.authService.login(req.user);
     return message;
   }
 
