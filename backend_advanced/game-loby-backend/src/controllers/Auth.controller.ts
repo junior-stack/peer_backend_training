@@ -1,6 +1,7 @@
-import { Controller, Post, Get, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Get, UseGuards, Request, Req } from '@nestjs/common';
 import { AuthService } from 'src/services/auth/auth.service';
 import { LocalAuthGuard } from 'src/services/auth/localAuth.guard';
+import { Request as Reqest } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -14,7 +15,8 @@ export class AuthController {
   }
 
   @Get('/logout')
-  logout() {
+  logout(@Req() req: Reqest) {
+    req.logOut();
     return 'log out';
   }
 }
