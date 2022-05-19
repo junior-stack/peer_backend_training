@@ -1,16 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from '../app.controller';
-import { AppService } from '../app.service';
-import { AuthController } from 'src/controllers/Auth.controller';
-import { GameLobyController } from 'src/controllers/Game.controller';
-import { ProfileController } from 'src/controllers/Profile.controller';
-import { GameService } from 'src/services/game/game.service';
-import { AuthService } from 'src/services/auth/auth.service';
-import { ProfileService } from 'src/services/profile/profile.service';
+import { AuthModule } from './modules/auth/auth.module';
+import { GameModule } from './modules/game/game.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @Module({
-  imports: [],
-  controllers: [AuthController, GameLobyController, ProfileController],
-  providers: [GameService, AuthService, ProfileService],
+  imports: [AuthModule, GameModule, ProfileModule],
 })
 export class AppModule {}
