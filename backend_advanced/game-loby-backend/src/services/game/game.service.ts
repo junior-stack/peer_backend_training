@@ -12,7 +12,6 @@ export class GameService {
     const data = await this.prisma.users.findMany({
       orderBy: { email: 'asc' },
     });
-    console.log('data: ', data);
     return data;
   }
 

@@ -13,42 +13,41 @@ admin.initializeApp();
 
 exports.getAllColors = functions.https.onCall((data, context) => {
   return admin
-      .firestore()
-      .collection("userColor")
-      .get()
-      .then((snapshots) => {
-        console.log("snapshots", snapshots);
-        return snapshots.docs.map((doc) => doc.data());
-      });
+    .firestore()
+    .collection("userColor")
+    .get()
+    .then((snapshots) => {
+      return snapshots.docs.map((doc) => doc.data());
+    });
 });
 
 exports.updateColor = functions.https.onCall((data, context) => {
   return admin
-      .firestore()
-      .collection("userColor")
-      .doc(data.uid)
-      .update({color: data.color})
-      .then((res) => {
-        return {message: "success", write: res};
-      });
+    .firestore()
+    .collection("userColor")
+    .doc(data.uid)
+    .update({ color: data.color })
+    .then((res) => {
+      return { message: "success", write: res };
+    });
 });
 
 exports.uploadPicture = functions.https.onCall((data, context) => {
   return admin
-      .firestore()
-      .collection("userProfile")
-      .doc(data.uid)
-      .set({url: data.url})
-      .then((res) => {
-        return {message: "success", write: res};
-      });
+    .firestore()
+    .collection("userProfile")
+    .doc(data.uid)
+    .set({ url: data.url })
+    .then((res) => {
+      return { message: "success", write: res };
+    });
 });
 
 exports.getProfile = functions.https.onCall((data, context) => {
   return admin
-      .firestore()
-      .collection("userProfile")
-      .doc(data.uid)
-      .get()
-      .then((doc) => doc.data());
+    .firestore()
+    .collection("userProfile")
+    .doc(data.uid)
+    .get()
+    .then((doc) => doc.data());
 });
